@@ -11,6 +11,7 @@ resource "aws_security_group" "demo_sg" {
   }
 
   egress {
+    description = "Allow all outbound"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -19,7 +20,7 @@ resource "aws_security_group" "demo_sg" {
 }
 
 resource "aws_instance" "demo" {
-  ami           = "ami-0c02fb55956c7d316" # Amazon Linux 2 us-east-2
+  ami           = var.ami
   instance_type = var.instance_type
   security_groups = [aws_security_group.demo_sg.name]
 
